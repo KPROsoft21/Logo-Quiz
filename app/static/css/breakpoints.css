@@ -1,0 +1,92 @@
+/*======================================
+
+    Breakpoints have been seperated into a seperate
+    file for easier maintenance. A mobile first apprroach
+    has been employed with media queries increasing
+    by minimum width.
+
+======================================*/
+
+
+
+/*======================================
+*   MIN-WIDTH: 340 PX
+*======================================*/
+
+
+@media screen and (min-width: 340px) {
+
+    #nav-right {
+        font-size: 1em;
+    }
+}
+
+
+
+/*======================================
+*   MIN-WIDTH: 500 PX
+*======================================*/
+
+@media screen and (min-width: 500px) {
+
+    .current-stats {
+        display: inline-block;
+    }
+}
+
+
+
+/*======================================
+*   MIN-WIDTH: 640 PX
+*======================================*/
+
+/* 
+*   This media query is the main breakpoint which adjusts
+*   the index page flow from stacked to side by side 
+*   with small adjustments to font-size and margins 
+*/
+
+@media screen and (min-width: 650px) {
+
+    header {
+        margin-bottom: 60px;
+    }
+    
+    #nav-logo {
+        font-size: 3vmin;
+    }
+    
+    #nav-right {
+        font-size: 1rem;
+    }
+    
+    #index-wrapper {
+        display: flex;
+    }
+    
+    .index-right, .index-left {
+        margin-top: 0;
+    }
+
+    .index-left {
+        width: 40%;
+    }
+    
+    .index-right {
+        margin-left: 4%;
+    }
+}
+
+
+
+/*======================================
+*   MIN-WIDTH: 1024 PX
+*======================================*/
+
+@media screen and (min-width: 1024px) {
+
+    .flask-error {
+        font-size: 3em;
+    }
+}
+

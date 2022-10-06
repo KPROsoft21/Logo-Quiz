@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="index">
+        <div id="index-wrapper">
+
+            <!-- LEFT CONTENT -->
+            <div class="index-left index-content">
+
+                <!-- LOGIN / REGISTER FORM - ONLY DISPLAYED IF USER IS NOT LOGGED IN -->
+                {% if not 'user' in session%}
+                    <h2 class="heading">Login | Register</h2>
+                    
+
+                    <!-- FORM -->
+                    <form action="" method="POST" autocomplete="off" novalidate>
+                        {{ login_form.hidden_tag() }}
+
+                        <!-- RADIO- LOGIN OR REGISTER -->
+                        <div class="radio">{{ login_form.login_or_register() }}</div>
+                        <!-- hide if no errors -->
+                        {% if login_form.login_or_register.errors %}
+                        <div class="error with-shadow">{% for error in login_form.login_or_register.errors %}<span>{{ error }}</span>{% endfor %}</div>
+                        {% endif %}
+                        <!-- USERNAME -->
+                        <div class="input">{{ login_form.username.label }}<br />{{ login_form.username() }}</div>
+                        <!-- hide if no errors -->
+                        {% if login_form.username.errors %}
+                        <div class="error with-shadow">{% for error in login_form.username.errors %}<span>{{ error }}</span>{% endfor %}</div>
+                        {% endif %}
+                        <!-- PASSWORD -->
+                        <div class="input">{{ login_form.password.label }}<br />{{ login_form.password() }}</div>
+                        <!-- hide if no errors -->
+                        {% if login_form.password.errors %}
+                        <div class="error with-shadow">{% for error in login_form.password.errors %}<span>{{ error }}</span>{% endfor %}</div>
+                        {% endif %}
+                        <!-- SUBMIT -->
+                        <div class="submit-button">{{ login_form.submit(class_="blue-button") }}</div>
+                    </form>
+
+
+
+                <!-- USER INFORMATION / PLAY GAME - ONLY DISPLAYED WHEN USER IS LOGGED IN -->
+                {% else %}
+                    <h2 class="heading">Welcome, {{ session.user.capitalize() }}</h2>
+
+                    <!-- USER SCORES -->
+                    <div id="index-user-info">
+                        <p><i class="fas fa-calendar-alt"></i>Last Played: <strong>{{ session.last_played }}</strong></p>
+                        <p><i class="fas fa-dice"></i>Times Played: <strong>{{ session.times_played }}</strong></p>
+                        <p><i class="fas fa-stopwatch"></i>Best Time: <strong>{{ session.best_time }}s</strong></p>
+                        <p><i class="fas fa-hat-wizard"></i>Best Score: <strong>{{ session.best_score }}</strong></p>
+                        <p><i class="fas fa-star"></i>Best Rating: <strong>{{ session.best_rating }}</strong></p>
+                    </div>
+                    <br />
+
+
+                    <!-- GO TO GAME BUTTON -->
+                    <a href="{{ url_for('game') }}"><button id="go-to-game" class="blue-button">play game</button></a>
+                {% endif %}
+            </div>
+
+
+            <!-- RIGHT CONTENT / GAME RULES -->
+            <div class="index-right index-content">
+                <h2 class="heading">How To Play</h2>
+                <ul>
+                    <li>You will be presented with <strong>30 brand logos</strong></li>
+                    <li>You will be <strong>timed</strong> from <strong>start to finish</strong></li>
+                    <li>You may <strong>skip</strong> an answer, but you <strong>can't</strong> go back</li>
+                    <li>You may attempt a question <strong>multiple</strong> times</li>
+                    <li>You will be <strong>rated</strong> on: score <strong>minus</strong> your time</li>
+                    <li>You may <strong>quit</strong>, if your <strong>score</strong> is above 1</li>
+                </ul>
+                <p><i>Good Luck!</i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

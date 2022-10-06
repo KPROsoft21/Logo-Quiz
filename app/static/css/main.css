@@ -1,0 +1,508 @@
+
+/*======================================
+
+    This file is organised by:
+    Global Styles and by relevent HTML page.
+
+    Where applicable I have tried to reuse classes that
+    are common through the application. 
+
+    Only a micro css framework has been used for quick 
+    styling of buttons and input element. All positioning 
+    has been achived by manually positioning with responsive
+    design or flexbox.
+
+======================================*/
+
+
+
+/*======================================
+*   VARIABLES / FONTS
+*======================================*/
+
+/* set common variables on document root */
+:root {
+    --white: #FAFAFA;
+    --blue: #3873d7;
+    --green: #269687;
+    --red: #9f2b32;
+    --purple: #7c4598;
+    --yellow: #ffc000;
+    --text-shadow: 1px 1px rgba(0,0,0,0.5);
+}
+
+/*===================
+*   FONT-FACE
+*===================*/
+
+@font-face {
+    src: url('../fonts/Crass.ttf');
+    font-family: 'Crass';
+}
+
+@font-face {
+    src: url('../fonts/Ubuntu.ttf');
+    font-family: 'Ubuntu';
+}
+
+
+
+/*======================================
+*   GENERAL / GLOBAL 
+*======================================*/
+
+
+/* 
+*   body has a display of flex to push footer to the 
+*   bottom regardless of the amount of content .
+*/
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 900px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 15px;
+    color: var(--white);
+    font-family: 'Ubuntu', 'Roboto', sans-serif;
+    font-size: 0.9rem;
+    background-color: var(--blue);
+}
+
+/* cause main to fill available space  */
+main {
+    flex: 1;
+}
+
+a {
+    transition: 0.3s;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+.heading {
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: var(--text-shadow);
+}
+
+/* clouds initialy needs display:none */
+#clouds {
+    display: none;
+}
+
+/* set div lower before slide up animation */
+.fade-slide-in {
+    margin-top: 100px;
+    opacity: 0;
+}
+
+/*===================
+*   FLASK - FLASH MESSAGE
+*===================*/
+
+/* 
+*   Flask flash messages will be hidden initally and when
+*   a message appears will slide up from the bottom of
+*   the screen and stay for a period of time retracting
+*/
+
+.flash {
+    max-width: 900px;
+    position: absolute;
+    top: -70px;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    margin: auto;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 1.8em;
+    animation-iteration-count: 1;
+    animation-name: showflash;  
+    animation-duration: 5s;
+    animation-timing-function: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+    background-color: #333;
+}
+
+.flash .fas {
+    margin-right: 8px;
+    color: lightsalmon;
+}
+
+/* Keyframes animation for flask flash */
+@keyframes showflash {
+    0% { top: -70px;}
+    5% { top: 0px;}
+    95% { top: 0px;}
+    100% {  top: -70px;}
+}
+
+/*===================
+*   FORMS ERROR
+*===================*/
+
+/* Error message show when flask forms validation fails */
+.error {
+    max-width: 100%;
+    padding-left: 15px;
+    padding: 8px 5px 8px 15px;
+    border-radius: 4px;
+    color: white;
+    background-color: #333;
+}
+
+/*===================
+*   FOOTER
+*===================*/
+
+footer {
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* personal link */
+#ref-link {
+    height: 30px;
+    margin-top: 30px;
+    text-decoration: underline;
+    color: var(--white);
+}
+
+
+
+/*======================================
+*   NAVIGATION / GLOBAL
+*======================================*/
+
+nav {
+    position: relative;
+}
+
+nav div {
+    display: inline-block;
+    height: 80px;
+    line-height: 80px;
+
+}
+
+/*===================
+*   LOGO
+*===================*/
+
+/* nav is relative as absolute element are contained within */
+#nav-left {
+    position: relative;
+    top: 1px;
+}
+
+#nav-logo {
+    font-family: 'Crass', monospace;
+    font-size: 1em;
+    text-decoration: none;
+    text-shadow: var(--text-shadow);
+    color: var(--white);
+}
+
+/*===================
+*   PROFILE
+*===================*/
+
+#nav-right {
+    font-size: 0.8em;
+    float: right;
+}
+
+#nav-leaderboard, #nav-home {
+    color: var(--white);
+}
+
+/*===================
+*   PROFILE TAB
+*===================*/
+
+.fa-user-circle {
+    position: relative;
+    top: 5px;
+    margin-left: 12px;
+    font-size: 2em;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.fa-user-circle:hover {
+    opacity: 0.7;
+}
+
+/*
+*   profile-tab visibility is controlled with javascript
+*   initally hidden from user requiring a click on
+*   the parent element - a profile icon
+*/
+
+.paper-profile {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: 55px;
+    right: 0;
+    height: 200px;
+    width: 175px;
+    font-family: 'Ubuntu', 'Roboto', sans-serif;
+    font-size: .75rem;
+}
+
+.profile-data {
+    color: var(--red);
+    float: right;
+}
+
+#logout a {
+    float: right;
+}
+
+
+
+/*======================================
+*   INDEX.HTML
+*======================================*/
+
+/* try to center content */
+.index-content {
+    max-width: 350px;
+    margin: auto;
+    margin-bottom: 60px;
+}
+
+/*===================
+*   FORM CONTENT - LEFT
+*===================*/
+
+
+.index-left ul {
+    padding-left: 0;
+}
+
+.index-left li {
+    display: inline-block;
+    width: 120px;
+}
+
+.index-left input[type='text'],
+.index-left input[type='password'] {
+    width: 100%;
+}
+
+.index-lef .submit-button {
+    margin-top: 30px;
+}
+
+/* user information */
+#index-user-info {
+    margin-top: 54px;
+}
+
+#index-user-info .fas {
+    width: 30px;
+}
+
+/*===================
+*   HOW TO PLAY - RIGHT
+*===================*/
+
+.index-right ul {
+    padding-left: 18px;
+    padding-top: 30px;
+    list-style-type: circle;
+}
+
+.index-right li {
+    padding-bottom: 15px;
+    font-size: .9rem;
+}
+
+
+
+/*======================================
+*   GAME.HTML
+*======================================*/
+
+#game {
+    position: relative;
+    max-width: 500px;
+    margin: auto;
+}
+
+/*===================
+*   STATISTICS / TIMER
+*===================*/
+
+/* 
+*   display each element as inline-block
+*   which will stack when fixed width's touch
+*/
+
+#current-game .current-stats {
+    display: inline-block;
+    width: 164px;
+    margin-bottom: 10px;
+}
+
+.current-stats i {
+    margin-right: 8px;
+}
+
+/*===================
+*   LOGO IMAGE
+*===================*/
+
+/* 
+*   used flexbox the center the image on x and y axis
+*   div has a fixed height suitable for both mobile and desktop
+*   the width will adjust, div is always centered on page
+*/
+#logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 270px;
+    max-width: 500px;
+    padding: 40px;
+    margin: 20px auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+
+/* make image responsive in its container */
+#logo-image {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/*===================
+*   GAME FORM
+*===================*/
+
+#game form {
+    margin-bottom: 30px;
+}
+
+#answer {
+    width: 100%;
+    padding-left: 30px;
+}
+
+#input {
+    width: 100%;
+}
+
+/*===================
+*   GAME BUTTONS
+*===================*/
+
+/* align button side by side and center on page */
+#buttons-container {
+    text-align: center;
+}
+
+/* apply a littlle margin so not touching */
+#buttons-container  * {
+    display: inline-block;
+    margin-top: 5px;
+    padding-bottom: 10px;
+}
+
+/* over-ride framework style */
+#pass-question {
+    color: white;
+    padding-left: 0;
+    margin-left: 5px;
+    text-decoration: none
+}
+
+/* over-ride framework style */
+#pass-question:hover {
+    opacity: 1;
+}
+
+
+
+/*======================================
+*   LEADERBOARD.HTML
+*======================================*/
+
+/* set table to be responsive */
+#leaderboard table {
+    width: 100%;
+    text-align: center;
+    background-color: var(--purple);
+}
+
+#leaderboard .blue-button {
+    margin: 40px 0;
+}
+
+/* table styling */
+th, tr, td {
+    padding: 5px 0;
+}
+
+th {
+    background-color: rgb(89, 47, 105);
+}
+
+/* create a zebra effect on table rows */
+tr:nth-child(odd) {
+    background-color: rgba(255,255,255,0.1);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.1);
+}
+
+/* 
+*   Highlight the current user entry differently to cause a 
+*   visually seperation and quick finding of the element
+*/
+
+#current-user-leaderboard {
+    background-color: #402B48;
+}
+
+
+
+/*======================================
+*   404.HTML / 500.HTML
+*======================================*/
+
+/*
+* Common to both 404 / 500 pages
+*/
+
+.flask-error {
+    margin-top: 8vh;
+    font-size: 2em;
+}
+
+/* Add rotating globe for fun effect */
+.fa-globe-americas {
+    display: block;
+    font-size: 2em;
+    text-align: center;
+    animation: rotateglobe 2s linear infinite;
+}
+
+/* rotating global keyframes */
+@keyframes rotateglobe {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(359deg); }
+}
+
+
+

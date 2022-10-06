@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="game" class="fade-slide-in">
+
+        <!-- CURRENT GAME STATS & TIMER -->
+        <div id="current-game">
+            <p class="current-stats"><i class="fas fa-question-circle"></i>Question: <strong>{{ session.index }} / 30</strong></p>
+            <p class="current-stats"><i class="fas fa-check-circle"></i>Correct: <strong>{{ session.current_score }} / 30</strong></p>
+            <p class="current-stats"><i class="fas fa-stopwatch"></i>Time: <strong><span id="current-time">{{ session.current_time }}</span>s</strong></p>
+        </div>
+
+
+        <!-- LOGO CONTAINER & IMAGE -->
+        <div id="logo-container" class="with-shadow">
+            <img id="logo-image" src="{{ url_for( 'static', filename=session.game[session.index - 1].image_url ) }}" alt="">
+        </div>
+
+
+        <!-- ANSWER FORM - USING FLASK-WTF -->
+        <form action="" method="POST" autocomplete="off" novalidate>
+            {{ answer_form.hidden_tag() }}
+            
+            <!-- INPUT FORM & INPUT FORM ERRORS -->
+            <div id="answer-input" class="input">{{ answer_form.answer.label }}<br />{{ answer_form.answer(value="", id="input") }}</div>
+            {% if answer_form.answer.errors %}
+                <div class="error with-shadow">{% for error in answer_form.answer.errors %}<span>{{ error }}</span>{% endfor %}</div>
+            {% endif %}
+
+            <!-- BUTTONS CONTAINER FOR: SUBMIT , PASS -->
+            <div id="buttons-container">
+                <div>{{ answer_form.submit(class_="green-button") }}</div>
+                <a id="pass-question" class="red-button" href="{{ url_for('game') }}">pass</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

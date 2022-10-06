@@ -1,0 +1,42 @@
+{% block content %}
+
+    <!--LOGO -->
+    <div id="nav-left">
+        <a id="nav-logo" href="{{ url_for('index') }}">Ultimate Logo Quiz</a>
+    </div>
+
+    
+    <!-- LEADERBOARD / PROFILE TAB-->
+    <div id="nav-right">
+        <!-- Change link depending on current page - certian urls should not accessable -->
+        {% if endpoint == 'leaderboard' %}
+            <a id="nav-home" href="{{ url_for('index') }}">Home</a>
+        {% elif endpoint == 'game'%}
+            <a id="nav-home" href="{{ url_for('leaderboard') }}">End Game</a>
+        {% else %}
+            <a id="nav-leaderboard" href="{{ url_for('leaderboard') }}">Leaderboard</a>
+        {% endif %}
+
+
+        <!-- PROFILE - ONLY SHOW IF LOGGED IN -->
+        {% if 'user' in session %}
+        <div id="profile">
+            
+            <!-- CLICKABLE PROFILE ICON -->
+            <i class="fas fa-user-circle"></i>
+
+            <!-- HIDDEN STATISTICS PROFILE TAB - ALSO SERVES AS LOGOUT LINK LOCATION -->
+            <div class="paper paper-profile">
+                <!-- STATS -->
+                <p>Times Played: <span class="profile-data">{{ session.times_played }}</span></p>
+                <p>Best Time: <span class="profile-data">{{ session.best_time }}s</span></p>
+                <p>Best Score: <span class="profile-data">{{ session.best_score }}</span></p>
+                <p>Best Rating: <span class="profile-data">{{ session.best_rating }}</span></p>
+
+                <!-- LOGOUT LINK -->
+                <p id="logout"><a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> &nbsp; Logout </a></p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

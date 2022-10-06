@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="leaderboard" class="fade-slide-in">
+        <h2 class="heading">Leaderboard</h2>
+
+        
+        <!-- TOP LEADERBOARD -->
+        <table id="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Time (sec)</th>
+                    <th scope="col">Score</th>
+                    <th scope="col">Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ITERATE LEADERBOARD - APPLY DIFFERENT CLASS IF USER IS IN THAT ROW -->
+                {% for user in leaderboard %}
+                    {% if session.user == user.username or user.username == 'LAST PLAYED' %}
+                    <tr id="current-user-leaderboard">
+                    {% else %}
+                    <tr>
+                    {% endif %}
+                        <th scope="row">{{ loop.index }}</th> 
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.best_time }}</td>
+                        <td>{{ user.best_score }}</td>
+                        <td>{{ user.best_rating }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <!-- GO TO HOME BUTTON -->
+        <a href="{{ url_for('index') }}">
+            <button class="blue-button">{% if 'user' in session %}home{% else %}login{% endif %}</button>
+        </a>
+       
+    </div>
+{% endblock %}
